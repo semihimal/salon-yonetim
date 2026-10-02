@@ -2,9 +2,8 @@
 
 @foreach ($customers as $customer)
 
-<p>
-    {{ $customer['name'] }} - 
-    {{ $customer['phone'] }}
-</p>
+    <p>{{ $customer->name }} - 
+        {{ $customer->phone }}
+    </p>
 
 @endforeach
