@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ServiceController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,3 +14,4 @@ Route::post('/customers', [CustomerController::class, 'store']);
 Route::get('/customers/{customer}/edit', [CustomerController::class, 'edit']);
 Route::put('/customers/{customer}', [CustomerController::class, 'update']);
 Route::delete('/customers/{customer}', [CustomerController::class, 'destroy']);
+route::resource('services', ServiceController::class);
