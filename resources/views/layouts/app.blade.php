@@ -20,14 +20,6 @@
             margin: auto;
         }
 
-        .menu {
-            margin-bottom: 30px;
-        }
-
-        .menu a {
-            margin-right: 15px;
-        }
-
         .cards {
             display: flex;
             gap: 20px;
@@ -133,6 +125,61 @@
             align-items: center;
             margin-bottom: 20px;
         }
+
+        .menu {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+
+        .menu a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        .menu a:hover {
+            background: #e5e5e5;
+        }
+
+        .edit-link {
+            display: inline-block;
+            padding: 7px 12px;
+            background: #eeeeee;
+            color: #222;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .edit-link:hover {
+            background: #dddddd;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+        }
+
+        .status-confirmed {
+            background: #d1e7dd;
+        }
+
+        .status-completed {
+            background: #cff4fc;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+        }
     </style>
 </head>
 
@@ -143,7 +190,7 @@
         <h1>Salon Yönetim Sistemi</h1>
 
         <div class="menu">
-            <a href="/dashboard">Dashboard</a>
+            <a href="/dashboard">Ana Panel</a>
             <a href="/customers">Müşteriler</a>
             <a href="/services">Hizmetler</a>
             <a href="/appointments">Randevular</a>

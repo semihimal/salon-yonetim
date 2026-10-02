@@ -40,7 +40,9 @@
                 <td>
                     <div class="actions">
 
-                        <a href="/services/{{ $service->id }}/edit">
+                        <a 
+                            class="edit-link"
+                            href="/services/{{ $service->id }}/edit">
                             Düzenle
                         </a>
 

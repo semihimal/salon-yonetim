@@ -30,7 +30,9 @@
                 <td>{{ $customer->phone }}</td>
 
                 <td>
-                    <a href="/customers/{{ $customer->id }}/edit">
+                    <a 
+                        class="edit-link"
+                        href="/customers/{{ $customer->id }}/edit">
                         Düzenle
                     </a>
 
