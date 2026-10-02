@@ -1,29 +1,76 @@
-<h1>Randevular</h1>
+@extends('layouts.app')
 
-<a href="/appointments/create">Yeni Randevu Ekle</a>
+@section('title', 'Randevular')
 
-@foreach ($appointments as $appointment)
+@section('content')
 
-    <p>
-        {{ $appointment->customer->name }} -
-        {{ $appointment->service->name }} -
-        {{ $appointment->appointment_at->format('d.m.Y H:i') }} -
-        {{ $appointment->status }}
+    <div class="page-header">
+        <h2>Randevular</h2>
 
-        <a href="/appointments/{{ $appointment->id }}/edit">
-            Duzenle
+        <a class="button" href="/appointments/create">
+            Yeni Randevu Ekle
         </a>
+    </div>
 
-        <form
-            action="/appointments/{{ $appointment->id }}"
-            method="POST"
-            style="display:inline;"
-        >
-            @csrf
-            @method('DELETE')
+    <table>
+        <thead>
+            <tr>
+                <th>Müşteri</th>
+                <th>Hizmet</th>
+                <th>Tarih</th>
+                <th>Durum</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
 
-            <button type="submit">Sil</button>
-        </form>
-    </p>
+        <tbody>
 
-@endforeach
+        @foreach ($appointments as $appointment)
+
+            <tr>
+                <td>
+                    {{ $appointment->customer->name }}
+                </td>
+
+                <td>
+                    {{ $appointment->service->name }}
+                </td>
+
+                <td>
+                    {{ $appointment->appointment_at->format('d.m.Y H:i') }}
+                </td>
+
+                <td>
+                    {{ $appointment->status }}
+                </td>
+
+                <td>
+                    <div class="actions">
+
+                        <a href="/appointments/{{ $appointment->id }}/edit">
+                            Düzenle
+                        </a>
+
+                        <form
+                            action="/appointments/{{ $appointment->id }}"
+                            method="POST"
+                            style="display:inline;"
+                        >
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit">
+                                Sil
+                            </button>
+                        </form>
+
+                    </div>
+                </td>
+            </tr>
+
+        @endforeach
+
+        </tbody>
+    </table>
+
+@endsection

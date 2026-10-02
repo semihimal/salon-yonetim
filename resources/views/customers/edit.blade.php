@@ -1,4 +1,10 @@
-<h1>Musteri Duzenle</h1>
+@extends('layouts.app')
+
+@section('title', 'Müşteri Düzenle')
+
+@section('content')
+
+<h1>Müşteri Düzenle</h1>
 
 <form action="/customers/{{ $customer->id }}" method="POST">
     @csrf
@@ -46,3 +52,5 @@
 
     <button type="submit">Degisiklikleri Kaydet</button>
 </form>
+
+@endsection

@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard');
 });
 
 Route::get('/customers', [CustomerController::class, 'index']);
@@ -17,3 +18,4 @@ Route::put('/customers/{customer}', [CustomerController::class, 'update']);
 Route::delete('/customers/{customer}', [CustomerController::class, 'destroy']);
 Route::resource('services', ServiceController::class);
 Route::resource('appointments', AppointmentController::class);
+Route::get('/dashboard', [DashboardController::class, 'index']);

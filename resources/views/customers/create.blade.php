@@ -1,14 +1,17 @@
-<h1>Yeni Musteri Ekle</h1>
+@extends('layouts.app')
+
+@section('title', 'Yeni Müşteri')
+
+@section('content')
+
+<h2>Yeni Müşteri Ekle</h2>
 
 @if ($errors->any())
-    <div>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
 @endif
 
 <form action="/customers" method="POST">
@@ -42,5 +45,9 @@
 
     <br>
 
-    <button type="submit">Musteriyi Kaydet</button>
+    <button class="button" type="submit">
+        Müşteriyi Kaydet
+    </button>
 </form>
+
+@endsection

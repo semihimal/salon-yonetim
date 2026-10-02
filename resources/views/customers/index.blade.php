@@ -1,21 +1,57 @@
-<h1>Musteriler</h1>
+@extends('layouts.app')
 
-@foreach ($customers as $customer)
+@section('title', 'Müşteriler')
 
-    <p>
-        {{ $customer->name }} -
-        {{ $customer->phone }}
+@section('content')
 
-        <form
-            action="/customers/{{ $customer->id }}"
-            method="POST"
-            style="display:inline;"
-        >
-            @csrf
-            @method('DELETE')
+    <h2>Müşteriler</h2>
 
-            <button type="submit">Sil</button>
-        </form>
-    </p>
+    <a class="button" href="/customers/create">
+        Yeni Müşteri Ekle
+    </a>
 
-@endforeach
+    <br><br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Ad Soyad</th>
+                <th>Telefon</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        @foreach ($customers as $customer)
+
+            <tr>
+                <td>{{ $customer->name }}</td>
+                <td>{{ $customer->phone }}</td>
+
+                <td>
+                    <a href="/customers/{{ $customer->id }}/edit">
+                        Düzenle
+                    </a>
+
+                    <form
+                        action="/customers/{{ $customer->id }}"
+                        method="POST"
+                        style="display:inline;"
+                    >
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit">
+                            Sil
+                        </button>
+                    </form>
+                </td>
+            </tr>
+
+        @endforeach
+
+        </tbody>
+    </table>
+
+@endsection

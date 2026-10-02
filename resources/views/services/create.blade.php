@@ -1,43 +1,60 @@
-<h1>Yeni Hizmet Ekle</h1>
+@extends('layouts.app')
 
-@if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
+@section('title', 'Yeni Hizmet')
 
-<form action="/services" method="POST">
-    @csrf
+@section('content')
 
-    <div>
-        <label>Hizmet Adi</label>
-        <input type="text" name="name">
-    </div>
+    <h2>Yeni Hizmet Ekle</h2>
 
-    <br>
+    @if ($errors->any())
+        <div class="error-list">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-    <div>
-        <label>Fiyat</label>
-        <input type="number" step="0.01" name="price">
-    </div>
+    <form action="/services" method="POST">
+        @csrf
 
-    <br>
+        <div>
+            <label>Hizmet Adı</label>
+            <input
+                type="text"
+                name="name"
+                value="{{ old('name') }}"
+            >
+        </div>
 
-    <div>
-        <label>Sure (Dakika)</label>
-        <input type="number" name="duration_minutes">
-    </div>
+        <div>
+            <label>Fiyat</label>
+            <input
+                type="number"
+                step="0.01"
+                name="price"
+                value="{{ old('price') }}"
+            >
+        </div>
 
-    <br>
+        <div>
+            <label>Süre (Dakika)</label>
+            <input
+                type="number"
+                name="duration_minutes"
+                value="{{ old('duration_minutes') }}"
+            >
+        </div>
 
-    <div>
-        <label>Aciklama</label>
-        <textarea name="description"></textarea>
-    </div>
+        <div>
+            <label>Açıklama</label>
+            <textarea name="description">{{ old('description') }}</textarea>
+        </div>
 
-    <br>
+        <button class="button" type="submit">
+            Hizmeti Kaydet
+        </button>
+    </form>
 
-    <button type="submit">Hizmeti Kaydet</button>
-</form>
+@endsection

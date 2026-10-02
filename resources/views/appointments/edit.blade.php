@@ -1,93 +1,127 @@
-<h1>Randevu Duzenle</h1>
+@extends('layouts.app')
 
-@if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
+@section('title', 'Randevu Düzenle')
 
-<form action="/appointments/{{ $appointment->id }}" method="POST">
-    @csrf
-    @method('PUT')
+@section('content')
 
-    <div>
-        <label>Musteri</label>
+    <h2>Randevu Düzenle</h2>
 
-        <select name="customer_id">
-            @foreach ($customers as $customer)
+    @if ($errors->any())
+        <div class="error-list">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="/appointments/{{ $appointment->id }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <div>
+            <label>Müşteri</label>
+
+            <select name="customer_id">
+                @foreach ($customers as $customer)
+                    <option
+                        value="{{ $customer->id }}"
+                        @selected(
+                            old('customer_id', $appointment->customer_id)
+                            == $customer->id
+                        )
+                    >
+                        {{ $customer->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div>
+            <label>Hizmet</label>
+
+            <select name="service_id">
+                @foreach ($services as $service)
+                    <option
+                        value="{{ $service->id }}"
+                        @selected(
+                            old('service_id', $appointment->service_id)
+                            == $service->id
+                        )
+                    >
+                        {{ $service->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div>
+            <label>Randevu Tarihi ve Saati</label>
+
+            <input
+                type="datetime-local"
+                name="appointment_at"
+                value="{{ old(
+                    'appointment_at',
+                    $appointment->appointment_at->format('Y-m-d\TH:i')
+                ) }}"
+            >
+        </div>
+
+        <div>
+            <label>Durum</label>
+
+            <select name="status">
+
                 <option
-                    value="{{ $customer->id }}"
-                    @selected($appointment->customer_id == $customer->id)
+                    value="pending"
+                    @selected(
+                        old('status', $appointment->status) == 'pending'
+                    )
                 >
-                    {{ $customer->name }}
+                    Bekliyor
                 </option>
-            @endforeach
-        </select>
-    </div>
 
-    <br>
-
-    <div>
-        <label>Hizmet</label>
-
-        <select name="service_id">
-            @foreach ($services as $service)
                 <option
-                    value="{{ $service->id }}"
-                    @selected($appointment->service_id == $service->id)
+                    value="confirmed"
+                    @selected(
+                        old('status', $appointment->status) == 'confirmed'
+                    )
                 >
-                    {{ $service->name }}
+                    Onaylandı
                 </option>
-            @endforeach
-        </select>
-    </div>
 
-    <br>
+                <option
+                    value="completed"
+                    @selected(
+                        old('status', $appointment->status) == 'completed'
+                    )
+                >
+                    Tamamlandı
+                </option>
 
-    <div>
-        <label>Randevu Tarihi ve Saati</label>
+                <option
+                    value="cancelled"
+                    @selected(
+                        old('status', $appointment->status) == 'cancelled'
+                    )
+                >
+                    İptal
+                </option>
 
-        <input
-            type="datetime-local"
-            name="appointment_at"
-            value="{{ $appointment->appointment_at->format('Y-m-d\TH:i') }}"
-        >
-    </div>
+            </select>
+        </div>
 
-    <br>
+        <div>
+            <label>Not</label>
 
-    <div>
-        <label>Durum</label>
+            <textarea name="notes">{{ old('notes', $appointment->notes) }}</textarea>
+        </div>
 
-        <select name="status">
-            <option value="pending" @selected($appointment->status == 'pending')}>
-                Bekliyor
-            </option>
+        <button class="button" type="submit">
+            Değişiklikleri Kaydet
+        </button>
+    </form>
 
-            <option value="confirmed" @selected($appointment->status == 'confirmed')}>
-                Onaylandi
-            </option>
-
-            <option value="completed" @selected($appointment->status == 'completed')}>
-                Tamamlandi
-            </option>
-
-            <option value="cancelled" @selected($appointment->status == 'cancelled')}>
-                Iptal
-            </option>
-        </select>
-    </div>
-
-    <br>
-
-    <div>
-        <label>Not</label>
-        <textarea name="notes">{{ $appointment->notes }}</textarea>
-    </div>
-
-    <br>
-
-    <button type="submit">Degisiklikleri Kaydet</button>
-</form>
+@endsection
