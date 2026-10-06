@@ -1,31 +1,30 @@
 # Salon Yönetim Sistemi
 
-Bu proje, PHP ve Laravel öğrenme sürecimi gerçek bir uygulama geliştirerek ilerletmek amacıyla oluşturduğum bir salon yönetim sistemidir.
+Bu projeyi PHP ve Laravel öğrenirken, öğrendiğim konuları gerçek bir proje üzerinde uygulamak için geliştirdim.
 
-Projeyi geliştirirken Laravel'in temel yapılarını yalnızca teorik olarak öğrenmek yerine müşteri, hizmet ve randevu yönetimi gibi gerçek kullanım senaryoları üzerinde uygulamaya çalıştım.
+Amacım sadece örnek kod yazmak yerine; müşteri, hizmet ve randevu işlemlerinin olduğu küçük ama çalışan bir yönetim sistemi oluşturmaktı.
+
+Projeyi geliştirirken Laravel'in temel yapılarını, MySQL bağlantısını, CRUD işlemlerini, model ilişkilerini ve API tarafını uygulamalı olarak çalıştım.
 
 ## Projede Neler Var?
 
-- Dashboard
+- Ana panel
 - Müşteri yönetimi
 - Hizmet yönetimi
 - Randevu yönetimi
 - CRUD işlemleri
-- Form doğrulama (Validation)
-- MySQL veritabanı bağlantısı
-- Migration kullanımı
+- Form doğrulama
+- MySQL veritabanı
 - Eloquent ORM
 - Model ilişkileri
-- Foreign Key kullanımı
+- Foreign key kullanımı
 - Route Model Binding
-- Blade template yapısı
-- Ortak Blade Layout
+- Blade
 - REST API
-- JSON response
 - Postman ile API testleri
-- Git ve GitHub ile versiyon kontrolü
+- Git ve GitHub
 
-## Kullanılan Teknolojiler
+## Kullandığım Teknolojiler
 
 - PHP
 - Laravel 13
@@ -39,23 +38,22 @@ Projeyi geliştirirken Laravel'in temel yapılarını yalnızca teorik olarak ö
 
 ## Veritabanı Yapısı
 
-Projede temel olarak üç ana tablo bulunmaktadır:
+Projede temel olarak üç tablo bulunuyor.
 
 ### Customers
 
-Müşteri bilgilerini tutar.
+Müşteri bilgilerini tutuyor.
 
 - id
 - name
 - phone
 - email
 - notes
-- created_at
-- updated_at
+- timestamps
 
 ### Services
 
-Salonda verilen hizmetleri tutar.
+Sunulan hizmetleri tutuyor.
 
 - id
 - name
@@ -63,12 +61,11 @@ Salonda verilen hizmetleri tutar.
 - duration_minutes
 - description
 - is_active
-- created_at
-- updated_at
+- timestamps
 
 ### Appointments
 
-Randevu bilgilerini tutar.
+Müşteri ve hizmet arasında oluşturulan randevuları tutuyor.
 
 - id
 - customer_id
@@ -76,12 +73,20 @@ Randevu bilgilerini tutar.
 - appointment_at
 - status
 - notes
-- created_at
-- updated_at
+- timestamps
 
 ## Model İlişkileri
 
-Bir müşterinin birden fazla randevusu olabilir:
+Projede kullandığım temel ilişkiler:
 
-```php
-Customer -> hasMany(Appointment)
+```text
+Customer hasMany Appointment
+
+Service hasMany Appointment
+
+Appointment belongsTo Customer
+
+Appointment belongsTo Service
+
+## Bu sayede bir randevunun hangi müşteriye ve hangi hizmete ait olduğunu veritabanı üzerinden ilişkilendirmiş oldum.
+
