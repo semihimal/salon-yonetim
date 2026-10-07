@@ -194,7 +194,18 @@
             <a href="/customers">Müşteriler</a>
             <a href="/services">Hizmetler</a>
             <a href="/appointments">Randevular</a>
-        </div>
+            <form
+                action="/logout"
+                method="POST"
+                style="display:inline;"
+        >
+            @csrf
+
+            <button type="submit">
+            Çıkış Yap
+        </button>
+    </form>
+    </div>
 
         @yield('content')
 
