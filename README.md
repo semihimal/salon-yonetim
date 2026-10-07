@@ -23,6 +23,10 @@ Projeyi geliştirirken Laravel'in temel yapılarını, MySQL bağlantısını, C
 - REST API
 - Postman ile API testleri
 - Git ve GitHub
+- Yönetici giriş sistemi
+- Session tabanlı web authentication
+- Auth middleware ile korunan yönetim paneli
+- Laravel Sanctum ile API token authentication
 
 ## Kullandığım Teknolojiler
 
@@ -88,5 +92,4 @@ Appointment belongsTo Customer
 
 Appointment belongsTo Service
 
-## Bu sayede bir randevunun hangi müşteriye ve hangi hizmete ait olduğunu veritabanı üzerinden ilişkilendirmiş oldum.
-
+Bu sayede bir randevunun hangi müşteriye ve hangi hizmete ait olduğunu veritabanı üzerinden ilişkilendirmiş oldum.
